@@ -142,9 +142,9 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
         Socket.connect();
 
         // subscribe socket.io client to bittrex-event topic
-        var cleanUpFuncBittrexEventConfirm = Context.subscribe('bittrex-event', function(event, data) {
-            $log.info(data);
-
+        var cleanUpFuncBittrexEventConfirm = Context.subscribe('bittrex-event', function(event, markets) {
+            // refresh grid datasource markets
+            $scope.gridProducts.dataSource.data(markets);
         });
 
         // unsubscribe socket.io client to bittrex-event topic

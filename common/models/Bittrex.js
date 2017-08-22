@@ -12,12 +12,7 @@ module.exports = function(Bittrex) {
     var websocketsclient = bittrex.websockets.listen( function( data ) {
         if (data.M === 'updateSummaryState') {
             data.A.forEach(function(data_for) {
-                data_for.Deltas.forEach(function(marketsDelta) {
-                    // emit event bittrex to socket.io server
-                    app.io.emit('bittrex-event', marketsDelta);
-
-                    console.log('Ticker Update for '+ marketsDelta.MarketName, marketsDelta);
-                });
+                app.io.emit('bittrex-event', data_for.Deltas);
             });
         }
     });
