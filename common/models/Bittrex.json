@@ -1,0 +1,10 @@
+{
+    "name": "Bittrex",
+    "description": "Bittrex Service",
+    "base": "Model",
+    "properties": {},
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}
