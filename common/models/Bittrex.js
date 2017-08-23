@@ -3,8 +3,8 @@ var app = require('../../server/server');
 
 // bittrex secret tokens
 bittrex.options({
-    'apikey' : 'dd7b3f4ae0c7418ea5c2496156a4462a',
-    'apisecret' : '657ca683514740fabb0ed89788f9bfd9'
+    'apikey' : '',
+    'apisecret' : ''
 });
 
 module.exports = function(Bittrex) {
