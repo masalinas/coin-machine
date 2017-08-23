@@ -1,10 +1,12 @@
 var bittrex = require('node.bittrex.api');
 var app = require('../../server/server');
 
+var argv = require('minimist')(process.argv.slice(2));
+
 // bittrex secret tokens
 bittrex.options({
-    'apikey' : '',
-    'apisecret' : ''
+    'apikey' : argv.k,
+    'apisecret' : argv.s
 });
 
 module.exports = function(Bittrex) {
