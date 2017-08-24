@@ -34,7 +34,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
                     // define soket.io channels beetween utrack and utrack-gateway
                     $log.info('Subscribed to bittrex-event');
                     socket.on('bittrex-event', function(event) {
-                        $log.info('event from bittrex-event topic is: ' + event);
+                        //$log.info('event from bittrex-event topic is: ' + event);
 
                         // propagate the message throw event bus
                         Context.emit('bittrex-event', event);
@@ -95,25 +95,37 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
             scrollable: true,
             sortable: true,
             filterable: true,
+            resizable: true,
+            columnMenu: true,
             pageable: {
                 input: true,
                 numeric: false
             },
             columns: [
-                { field: "MarketName", title: "Market Name"},
+                { field: "MarketName", title: "Market Name", tooltip: "XXX"},
                 { field: "High", title: "High"},
                 { field: "Low", title: "Low"},
                 { field: "Volume", title: "Volume"},
                 { field: "Last", title: "Last"},
                 { field: "BaseVolume", title: "Base Volume"},
-                { field: "TimeStamp", title: "TimeStamp"},
+                { field: "TimeStamp", title: "TimeStamp", template: '#= kendo.toString(kendo.parseDate(TimeStamp), "dd/MM/yyyy HH:mm:ss")#'},
                 { field: "Bid", title: "Bid"},
                 { field: "Ask", title: "Ask"},
                 { field: "OpenBuyOrders", title: "Open Buy Orders"},
                 { field: "OpenSellOrders", title: "Open Sell Orders"},
                 { field: "PrevDay", title: "Previous Day"},
-                { field: "Created", title: "Created"}
+                { field: "Created", title: "Created", template: '#= kendo.toString(kendo.parseDate(Created), "dd/MM/yyyy HH:mm:ss")#'}
             ]
+        };
+
+        $scope.toolTipOptions = {
+            filter: ".k-header",
+            position: "top",
+            content: function(e) {
+                var content = $scope.gridProducts.columns[e.target.context.cellIndex].title;
+
+                return content;
+            }
         };
 
         // load market summary

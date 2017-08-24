@@ -38,7 +38,11 @@
         <kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onClick($event)">Get Markets</kendo-button>
         <label>Birthday: <input kendo-date-picker /></label>
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
-        <div kendo-grid="gridProducts" options="mainGridOptions"></div>
+
+        <div kendo-tooltip k-options="toolTipOptions">
+            <div id="markets" kendo-grid="gridProducts" options="mainGridOptions"></div>
+        </div>
+
         <!--<kendo-grid options="mainGridOptions"></kendo-grid>-->
 
         <!-- Jquery Kendo UI dependencies -->
