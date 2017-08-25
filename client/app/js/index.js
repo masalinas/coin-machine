@@ -189,6 +189,12 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             }
         };
 
+        // configure kendo widgets before rendered
+        $scope.$on("kendoRendered", function(e) {
+            // set list time intervals to readonly
+            //$scope.comboboxMarketInterval.readonly(true);
+        });
+
         // load graph summary
         $scope.onGraphClick = function (event) {
             // create data table on loaded data

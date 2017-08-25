@@ -25,7 +25,8 @@
     <body ng-controller="mainController" ng-cloak>
         <main layout="column" layout-padding flex>
             <div layout="row" layout-padding>
-                <select kendo-combo-box style="padding-left: 0; width: 280px; background-color: transparent" >
+                <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..."
+                        style="padding-left: 0; width: 280px; background-color: transparent">
                     <option>Última sesión - Tick a tick</option>
                     <option>Últimas 8 sesiones - 1 Minuto</option>
                     <option>Últimos 3 meses - 5 Minutos</option>
@@ -37,15 +38,16 @@
                     <option>Últimos 5 años - Mensual</option>
                     <option>Últimos 5 años - Anual</option>
                 </select>
-                <label>Start Date: <input kendo-date-time-picker ng-model="startTimestamp"/></label>
-                <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
+
+                <label>Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" ng-model="startTimestamp"/></label>
+                <input kendo-numerictextbox="numerictextboxMarket" k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
 
                 <span flex></span>
 
                 <button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>
 
                 <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
-                <button type="button" kendo-button class="k-primary" icon="'funnel-clear'" style="margin-left: 8px;" ng-click="onMarketClick($event)">Get Markets</button>
+                <button type="button" kendo-button="marketListButton" class="k-primary" icon="'funnel-clear'" style="margin-left: 8px;" ng-click="onMarketClick($event)">Get Markets</button>
             </div>
 
             <div kendo-tooltip k-options="toolTipOptions" flex>
