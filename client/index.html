@@ -2,7 +2,7 @@
 <html lang="en" ng-app="coinmachine">
     <head>
         <meta charset="UTF-8">
-        <title>CoinMachine</title>
+        <title>Coin Machine</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -39,15 +39,19 @@
                     <option>Últimos 5 años - Anual</option>
                 </select>
 
-                <label>Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" ng-model="startTimestamp"/></label>
+                <label>
+                    Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" ng-model="startTimestamp"/>
+                </label>
+
                 <input kendo-numerictextbox="numerictextboxMarket" k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
 
                 <span flex></span>
 
-                <button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>
+                <button type="button" kendo-button="printGrid" class="k-primary" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>
+                <!--<button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>-->
 
-                <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
                 <button type="button" kendo-button="marketListButton" class="k-primary" icon="'funnel-clear'" style="margin-left: 8px;" ng-click="onMarketClick($event)">Get Markets</button>
+                <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
             </div>
 
             <div kendo-tooltip k-options="toolTipOptions" flex>
@@ -74,10 +78,10 @@
         <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
 
-        <!-- Bootstrap dependencies -->
+        <!-- Bootstrap dependencies (only for layout) -->
         <!--<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
 
-        <!-- Google Material dependencies -->
+        <!-- Google Material dependencies (only for layout) -->
         <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
 
         <!-- Telerik Kendo UI dependencies-->
