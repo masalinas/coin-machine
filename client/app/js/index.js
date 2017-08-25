@@ -52,10 +52,72 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
             }
         };
     }])
+    .directive('expandKGrid', ['$window', function ($window) {
+        // Define the directive, but restrict its usage to
+        var directive = {
+            link: link,           // The function attaching the behavior
+            restrict: 'A',        // Restrict directive to be used only as attribute
+            require: 'kendoGrid'  // Ensure the directive is set on a <kendo-grid> element
+        };
+        return directive;
+
+
+        function link(scope, element, attrs) {
+            var gridElement = $(element);
+
+            // Attach an eventHandler to the resize event of the
+            // window to resize the data area of the grid accordingly
+            $($window).resize(function () {
+                // Get the element wrapping the data
+                var dataElement = gridElement.find('.k-grid-content');
+
+                // Get all other elements (headers, footers, etc...)
+                var nonDataElements = gridElement.children().not('.k-grid-content');
+
+                // Get the height of the whole grid without any borders or margins
+                var currentGridHeight = gridElement.innerHeight();
+
+                // Get viewport height
+                var viewportHeight = $(window).height();
+
+                var containerHeight = $('#market-container').height();
+
+                // Calculate and set the height for the data area, which is the height of the whole grid less the height taken by all non-data content.
+                var nonDataElementsHeight = 0;
+                nonDataElements.each(function () {
+                    nonDataElementsHeight += $(this).outerHeight();
+                });
+
+                //dataElement.height(currentGridHeight - nonDataElementsHeight);
+                //dataElement.height(viewportHeight - nonDataElementsHeight);
+                dataElement.height(100);
+            });
+        }
+    }])
     .controller('mainController', ['$scope', '$log', 'Bittrex', 'Socket', 'Context', function ($scope, $log, Bittrex, Socket, Context) {
         'use strict';
 
         $scope.markets = [];
+
+        /*function resizeGrid() {
+            var gridElement = $('#market-grid');
+
+            // Get the element wrapping the data
+            var dataElement = gridElement.find('.k-grid-content');
+            // Get all other elements (headers, footers, etc...)
+            var nonDataElements = gridElement.children().not('.k-grid-content');
+            // Get the height of the whole grid without any borders or margins
+            var currentGridHeight = gridElement.innerHeight();
+            // Calculate and set the height for the data area, which
+            // is the height of the whole grid less the height taken
+            // by all non-data content.
+            var nonDataElementsHeight = 0;
+            nonDataElements.each(function () {
+                nonDataElementsHeight += $(this).outerHeight();
+            });
+            dataElement.height(currentGridHeight - nonDataElementsHeight);
+        }*/
+
 
         // configure kendo ui table
         $scope.mainGridOptions = {
@@ -91,18 +153,18 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
                 },
                 pageSize: 50
             },
-            height: 550,
             scrollable: true,
             sortable: true,
             filterable: true,
             resizable: true,
             columnMenu: true,
+
             pageable: {
                 input: true,
                 numeric: false
             },
             columns: [
-                { field: "MarketName", title: "Market Name", tooltip: "XXX"},
+                { field: "MarketName", title: "Market Name"},
                 { field: "High", title: "High"},
                 { field: "Low", title: "Low"},
                 { field: "Volume", title: "Volume"},

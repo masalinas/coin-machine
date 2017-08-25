@@ -33,17 +33,21 @@
             </div>
         </div>
 
-        <!-- Kendo UI template example -->
         <!--<button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" ng-click="onClick($event)">Get Markets</button>-->
         <kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onClick($event)">Get Markets</kendo-button>
         <label>Birthday: <input kendo-date-picker /></label>
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
 
         <div kendo-tooltip k-options="toolTipOptions">
-            <div id="markets" kendo-grid="gridProducts" options="mainGridOptions"></div>
+            <div id="market-grid" kendo-grid="gridProducts" options="mainGridOptions" expand-k-grid></div>
+            <!--<kendo-grid options="mainGridOptions" expand-k-grid></kendo-grid>-->
         </div>
 
-        <!--<kendo-grid options="mainGridOptions"></kendo-grid>-->
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">Place sticky footer content here.</p>
+            </div>
+        </footer>
 
         <!-- Jquery Kendo UI dependencies -->
         <script type="text/javascript" src="vendor/jquery.min.js"></script>
