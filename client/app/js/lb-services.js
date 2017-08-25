@@ -68,12 +68,80 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Bittrex#getMarkets
+             * @methodOf lbServices.Bittrex
+             *
+             * @description
+             *
+             * Get Markets List
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Bittrex` object.)
+             * </em>
+             */
+            "getMarkets": {
+              isArray: true,
+              url: urlBase + "/Bittrexes/bittrex/getMarkets",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Bittrex#getMarketHistory
+             * @methodOf lbServices.Bittrex
+             *
+             * @description
+             *
+             * Get Market History
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `market` – `{string}` - Market name
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Bittrex` object.)
+             * </em>
+             */
+            "getMarketHistory": {
+              url: urlBase + "/Bittrexes/bittrex/:market/getMarketHistory",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Bittrex#getMarketSummaries
              * @methodOf lbServices.Bittrex
              *
              * @description
              *
-             * Get Market summaries
+             * Get Market Summaries
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -97,7 +165,40 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "getMarketSummaries": {
               isArray: true,
-              url: urlBase + "/Bittrexes/getMarketSummaries",
+              url: urlBase + "/Bittrexes/bittrex/getMarketSummaries",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Bittrex#getMarketSummary
+             * @methodOf lbServices.Bittrex
+             *
+             * @description
+             *
+             * Get Market Summary
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `market` – `{string}` - Market name
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Bittrex` object.)
+             * </em>
+             */
+            "getMarketSummary": {
+              url: urlBase + "/Bittrexes/bittrex/:market/getMarketSummary",
               method: "GET",
             },
 
@@ -108,7 +209,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * @description
              *
-             * Get Market tiker
+             * Get Ticker
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -131,6 +232,80 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "getTicker": {
               url: urlBase + "/Bittrexes/bittrex/:market/getTicker",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Bittrex#getOrderBook
+             * @methodOf lbServices.Bittrex
+             *
+             * @description
+             *
+             * Get Order Book
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `market` – `{string}` - Market name
+             *
+             *  - `depth` – `{number}` - Market Depth
+             *
+             *  - `type` – `{string}` - Order Type
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Bittrex` object.)
+             * </em>
+             */
+            "getOrderBook": {
+              url: urlBase + "/Bittrexes/bittrex/:market/:depth/:type/getOrderBook",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Bittrex#getCandles
+             * @methodOf lbServices.Bittrex
+             *
+             * @description
+             *
+             * Get Candles
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `market` – `{string}` - Market name
+             *
+             *  - `tickInterval` – `{string}` - Tick Interval
+             *
+             *  - `startTimestamp` – `{date}` - Start timestamp
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Bittrex` object.)
+             * </em>
+             */
+            "getCandles": {
+              url: urlBase + "/Bittrexes/bittrex/:market/:tickInterval/:startTimestamp/getCandles",
               method: "GET",
             },
           }

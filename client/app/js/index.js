@@ -1,4 +1,4 @@
-angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
+angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'ngMaterial'])
     .config(['$stateProvider', 'SocketProvider', function ($stateProvider) {
         'use strict';
     }])
@@ -61,7 +61,6 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
         };
         return directive;
 
-
         function link(scope, element, attrs) {
             var gridElement = $(element);
 
@@ -117,7 +116,6 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
             });
             dataElement.height(currentGridHeight - nonDataElementsHeight);
         }*/
-
 
         // configure kendo ui table
         $scope.mainGridOptions = {
@@ -184,14 +182,37 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices'])
             filter: ".k-header",
             position: "top",
             content: function(e) {
-                var content = $scope.gridProducts.columns[e.target.context.cellIndex].title;
+                if ($scope.gridProducts.columns[e.target.context.cellIndex] !== undefined)
+                    var content = $scope.gridProducts.columns[e.target.context.cellIndex].title;
 
                 return content;
             }
         };
 
+        // load graph summary
+        $scope.onGraphClick = function (event) {
+            // create data table on loaded data
+            var dataTable = anychart.data.table();
+
+            // get candles from startTimestamp
+            Bittrex.getCandles({market: 'BTC-LTC', tickInterval: 'fiveMin', startTimestamp: $scope.startTimestamp})
+                .$promise
+                .then(function(candles, responseHeaders) {
+                        if (candles.result.length > 0)
+                            $scope.candles = JSON.parse(angular.toJson(candles.result));
+                        else
+                            $scope.candles = [];
+
+                        $log.info($scope.candles.length + ' candles recovered');
+                    },
+                    function(httpResponse) {
+                        var error = httpResponse.data.error;
+                        $log.error('Error querying markets - ' + error.status + ": " + error.message);
+                    });
+        };
+
         // load market summary
-        $scope.onClick = function (event) {
+        $scope.onMarketClick = function (event) {
             // get Bittrex markets summary
             Bittrex.getMarketSummaries()
                 .$promise

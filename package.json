@@ -19,7 +19,8 @@
     "node.bittrex.api": "^0.4.4",
     "serve-favicon": "^2.0.1",
     "socket.io": "^2.0.3",
-    "strong-error-handler": "^1.0.1"
+    "strong-error-handler": "^1.0.1",
+    "talib": "^1.0.3"
   },
   "devDependencies": {
     "eslint": "^2.13.1",

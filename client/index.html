@@ -7,45 +7,57 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Bootstrap style sheets -->
-        <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!--<link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
+
+        <!-- Google material style sheets -->
+        <link type="text/css" rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
 
         <!-- Kendo UI style sheets -->
         <link type="text/css" rel="stylesheet" href="styles/kendo.common.min.css">
         <link type="text/css" rel="stylesheet" href="styles/kendo.default.min.css">
-        <link type="text/css" rel="stylesheet" href="styles/kendo.default.mobile.min.css" />
+
+        <!-- AnyChart style sheets -->
+        <link type="text/css" rel="stylesheet" href="styles/anychart-ui.min.css">
 
         <!-- Application style sheets -->
         <link type="text/css" rel="stylesheet" href="styles/index.css">
     </head>
     <body ng-controller="mainController" ng-cloak>
-        <!-- Main template example -->
+        <main layout="column" layout-padding flex>
+            <div layout="row" layout-padding>
+                <select kendo-combo-box style="padding-left: 0; width: 280px; background-color: transparent" >
+                    <option>Última sesión - Tick a tick</option>
+                    <option>Últimas 8 sesiones - 1 Minuto</option>
+                    <option>Últimos 3 meses - 5 Minutos</option>
+                    <option>Últimos 3 meses - 15 Minutos</option>
+                    <option>Últimos 3 meses - 30 Minutos</option>
+                    <option>Últimos 3 meses - 1 Hora</option>
+                    <option>Últimos 5 años - Diario</option>
+                    <option>Últimos 5 años - Semanal</option>
+                    <option>Últimos 5 años - Mensual</option>
+                    <option>Últimos 5 años - Anual</option>
+                </select>
+                <label>Start Date: <input kendo-date-time-picker ng-model="startTimestamp"/></label>
+                <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
 
-        <!-- Bootstrap template example  -->
-        <div class="container">
-            <h1>Hello World!</h1>
-            <div class="row">
-                <div class="col-sm-6" style="background-color:yellow;">
-                    <p>Lorem ipsum...</p>
-                </div>
-                <div class="col-sm-6" style="background-color:pink;">
-                    <p>Sed ut perspiciatis...</p>
-                </div>
+                <span flex></span>
+
+                <button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>
+
+                <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
+                <button type="button" kendo-button class="k-primary" icon="'funnel-clear'" style="margin-left: 8px;" ng-click="onMarketClick($event)">Get Markets</button>
             </div>
-        </div>
 
-        <!--<button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" ng-click="onClick($event)">Get Markets</button>-->
-        <kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onClick($event)">Get Markets</kendo-button>
-        <label>Birthday: <input kendo-date-picker /></label>
-        <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
+            <div kendo-tooltip k-options="toolTipOptions" flex>
+                <div id="market-grid" kendo-grid="gridProducts" options="mainGridOptions"></div>
+                <!--<div id="market-grid" kendo-grid="gridProducts" options="mainGridOptions" expand-k-grid></div>-->
+                <!--<kendo-grid options="mainGridOptions" expand-k-grid></kendo-grid>-->
+            </div>
+        </main>
 
-        <div kendo-tooltip k-options="toolTipOptions">
-            <div id="market-grid" kendo-grid="gridProducts" options="mainGridOptions" expand-k-grid></div>
-            <!--<kendo-grid options="mainGridOptions" expand-k-grid></kendo-grid>-->
-        </div>
-
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">Place sticky footer content here.</p>
+        <footer>
+            <div layout="row" layout-align="center center">
+                <h2>My Awesome Footer</h2>
             </div>
         </footer>
 
@@ -61,11 +73,18 @@
         <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
 
         <!-- Bootstrap dependencies -->
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!--<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+
+        <!-- Google Material dependencies -->
+        <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
 
         <!-- Telerik Kendo UI dependencies-->
         <script type="text/javascript" src="vendor/kendo.all.min.js"></script>
         <script type="text/javascript" src="vendor/jszip.min.js"></script>
+
+        <!-- AnyChart dependencies-->
+        <script type="text/javascript" src="vendor/anychart-ui.min.js"></script>
+        <script type="text/javascript" src="vendor/anystock.min.js"></script>
 
         <!-- Load socket.io client client from server -->
         <script src="/socket.io/socket.io.js"></script>
