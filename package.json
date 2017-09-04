@@ -16,6 +16,7 @@
     "loopback-component-explorer": "^2.4.0",
     "loopback-datasource-juggler": "^2.39.0",
     "minimist": "^1.2.0",
+    "node-red": "^0.17.5",
     "node.bittrex.api": "^0.4.4",
     "serve-favicon": "^2.0.1",
     "socket.io": "^2.0.3",
