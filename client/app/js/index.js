@@ -59,20 +59,13 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             restrict: 'A',        // Restrict directive to be used only as attribute
             scope: {
                 name: '=name',
-                options: '=options',
-                api: '=api'
+                options: '=options'
             },
             template: '<div kendo-grid="{{name}}" options="{{options}}"></div>'
         };
 
         function link(scope, element, attrs) {
             var gridElement = $(element);
-
-            scope.api = {
-                setData: function(datasource) {
-                    scope.gridMarkets.dataSource.data(datasource);
-                }
-            };
 
             // Attach an eventHandler to the resize event of the
             // window to resize the data area of the grid accordingly
