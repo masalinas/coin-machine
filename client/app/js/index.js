@@ -92,7 +92,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
 
         return directive;
     }])
-    .directive('expandKGrid', ['$window', function ($window) {
+    .directive('expandKGrid', ['$window', '$timeout', function ($window, $timeout) {
         // Define the directive, but restrict its usage to
         var directive = {
             link: link,           // The function attaching the behavior
@@ -103,9 +103,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         function link(scope, element, attrs) {
             var gridElement = $(element);
 
-            // Attach an eventHandler to the resize event of the
-            // window to resize the data area of the grid accordingly
-            $($window).resize(function () {
+            function resize() {
                 var newHeight = gridElement.innerHeight(),
                     otherElements = gridElement.children().not(".k-grid-content"),
                     otherElementsHeight = 0;
@@ -123,7 +121,17 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                 //  -- market grid header and footer
                 //  -- window margin and padding height
                 gridElement.children(".k-grid-content").height(height);
+            }
+
+            // Attach an eventHandler to the resize event of the
+            // window to resize the data area of the grid accordingly
+            $($window).resize(function () {
+                resize();
             });
+
+            $timeout(function() {
+                resize();
+            }, 1000);
         }
 
         return directive;
