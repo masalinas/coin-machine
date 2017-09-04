@@ -22,52 +22,52 @@
         <!-- Application style sheets -->
         <link type="text/css" rel="stylesheet" href="styles/index.css">
     </head>
-    <body ng-controller="mainController" ng-cloak>
-        <main layout="column" layout-padding flex>
-            <div layout="row" layout-padding>
-                <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..."
-                        style="padding-left: 0; width: 280px; background-color: transparent">
-                    <option>Última sesión - Tick a tick</option>
-                    <option>Últimas 8 sesiones - 1 Minuto</option>
-                    <option>Últimos 3 meses - 5 Minutos</option>
-                    <option>Últimos 3 meses - 15 Minutos</option>
-                    <option>Últimos 3 meses - 30 Minutos</option>
-                    <option>Últimos 3 meses - 1 Hora</option>
-                    <option>Últimos 5 años - Diario</option>
-                    <option>Últimos 5 años - Semanal</option>
-                    <option>Últimos 5 años - Mensual</option>
-                    <option>Últimos 5 años - Anual</option>
-                </select>
+    <body>
+        <div layout="column" layout-fill ng-controller="mainController" ng-cloak>
+            <main id="main" layout-padding flex>
+                <div id="filter" layout="row" layout-padding>
+                    <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..."
+                            style="padding-left: 0; width: 280px; background-color: transparent">
+                        <option>Última sesión - Tick a tick</option>
+                        <option>Últimas 8 sesiones - 1 Minuto</option>
+                        <option>Últimos 3 meses - 5 Minutos</option>
+                        <option>Últimos 3 meses - 15 Minutos</option>
+                        <option>Últimos 3 meses - 30 Minutos</option>
+                        <option>Últimos 3 meses - 1 Hora</option>
+                        <option>Últimos 5 años - Diario</option>
+                        <option>Últimos 5 años - Semanal</option>
+                        <option>Últimos 5 años - Mensual</option>
+                        <option>Últimos 5 años - Anual</option>
+                    </select>
 
-                <label>
-                    Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" ng-model="startTimestamp"/>
-                </label>
+                    <label>
+                        Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" ng-model="startTimestamp"/>
+                    </label>
 
-                <input kendo-numerictextbox="numerictextboxMarket" k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
+                    <input kendo-numerictextbox="numerictextboxMarket" k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>
 
-                <span flex></span>
+                    <span flex></span>
 
-                <button type="button" kendo-button="printGrid" class="k-primary" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>
-                <!--<button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>-->
+                    <button type="button" kendo-button="printGrid" class="k-primary" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>
+                    <!--<button type="button" id="printGrid" class="k-button k-primary" icon="'funnel-clear'" style="margin-right: 8px;" ng-click="onGraphClick($event)">Get Graph</button>-->
 
-                <button type="button" kendo-button="marketListButton" class="k-primary" icon="'funnel-clear'" style="margin-left: 8px;" ng-click="onMarketClick($event)">Get Markets</button>
-                <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
-            </div>
+                    <button type="button" kendo-button="marketListButton" class="k-primary" icon="'funnel-clear'" style="margin-left: 8px;" ng-click="onMarketClick($event)">Get Markets</button>
+                    <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
+                </div>
 
-            <div kendo-tooltip k-options="toolTipOptions" flex>
-                <div id="market-grid" kendo-grid="gridProducts" options="mainGridOptions"></div>
-                <!--<div id="market-grid" kendo-grid="gridProducts" options="mainGridOptions" expand-k-grid></div>-->
-                <!--<kendo-grid options="mainGridOptions" expand-k-grid></kendo-grid>-->
-            </div>
-        </main>
+                <div kendo-tooltip k-options="toolTipOptions" flex>
+                    <div id="market-grid" kendo-grid="gridMarkets" options="mainGridOptions" expand-k-grid></div>
+                    <!--<div id="market-expand-grid" kendo-expand-grid name="gridMarkets" options="mainGridOptions"></div>-->
+                </div>
+            </main>
 
-        <footer>
-            <div layout="row" layout-align="center center">
-                <h2>My Awesome Footer</h2>
-            </div>
-        </footer>
-
-        <!-- Jquery Kendo UI dependencies -->
+            <footer id="footer">
+                <div layout="row" layout-align="center center">
+                    <h2>My Fix Footer</h2>
+                </div>
+            </footer>
+        </div>
+        <!-- Jquery dependencies -->
         <script type="text/javascript" src="vendor/jquery.min.js"></script>
 
         <!-- Angular dependencies-->

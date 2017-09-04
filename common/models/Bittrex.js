@@ -42,13 +42,13 @@ module.exports = function(Bittrex) {
         }]
         }
      */
-    Bittrex.getMarkets = function(cb) {
+     Bittrex.getMarkets = function(cb) {
         bittrex.getmarkets(function( data, err ) {
             if (err) return cb(err);
 
             cb(null, data);
         });
-    };
+     };
 
     // publish Bittrex API
     /**
@@ -68,13 +68,13 @@ module.exports = function(Bittrex) {
               "OrderType": "BUY"
             }]
      */
-    Bittrex.getMarketHistory = function(market, cb) {
+     Bittrex.getMarketHistory = function(market, cb) {
         bittrex.getmarkethistory({market: market}, function(data, err) {
             if (err) return cb(err);
 
             cb(null, data);
         });
-    };
+     };
 
     /**
      *
@@ -95,7 +95,7 @@ module.exports = function(Bittrex) {
             "Created": "2015-12-11T06:31:40.653"
         }]
      */
-    Bittrex.getMarketSummaries = function(cb) {
+     Bittrex.getMarketSummaries = function(cb) {
         bittrex.getmarketsummaries( function(data, err) {
             if (err) return cb(err);
 
@@ -108,7 +108,7 @@ module.exports = function(Bittrex) {
 
             cb(null, markets);
         })
-    };
+     };
 
     /**
      * example:
@@ -135,13 +135,13 @@ module.exports = function(Bittrex) {
              ]
           }
      */
-    Bittrex.getMarketSummary = function(market, cb) {
+     Bittrex.getMarketSummary = function(market, cb) {
         bittrex.getmarketsummary({market : market}, function( data, err ) {
             if (err) return cb(err);
 
             cb(null, data);
         });
-    };
+     };
 
     /**
      * example:
@@ -155,12 +155,12 @@ module.exports = function(Bittrex) {
              "Last": 0.01165992
           }
      */
-    Bittrex.getTicker = function(market, cb) {
+     Bittrex.getTicker = function(market, cb) {
         bittrex.getticker( { market : market }, function( ticker ) {
 
             cb(null, ticker);
         });
-    };
+     };
 
     /**
      * example:
@@ -184,13 +184,13 @@ module.exports = function(Bittrex) {
                     }
               }
      */
-    Bittrex.getOrderBook = function(market, depth, type, cb) {
+     Bittrex.getOrderBook = function(market, depth, type, cb) {
         bittrex.getorderbook({ market : market, depth : depth, type : type}, function( data, err ) {
             if (err) return cb(err);
 
             cb(null, data);
         });
-    };
+     };
 
     /**
      * example:
@@ -212,7 +212,7 @@ module.exports = function(Bittrex) {
                     }]
                 }
      */
-    Bittrex.getCandles = function(market, tickInterval, startTimestamp, cb) {
+     Bittrex.getCandles = function(market, tickInterval, startTimestamp, cb) {
         var startTimestamp = startTimestamp.getTime()/1000;
 
         bittrex.getcandles({ marketName : market, tickInterval: tickInterval, _: startTimestamp}, function( data, err ) {
@@ -220,18 +220,18 @@ module.exports = function(Bittrex) {
 
             cb(null, data);
         });
-    };
+     };
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getMarkets',
         {
             description : "Get Markets List",
             returns: {arg: 'markets', type: 'array', root: true},
             http: {verb: 'get', path: '/bittrex/getMarkets'}
         }
-    );
+     );
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getMarketHistory',
         {
             description : "Get Market History",
@@ -239,18 +239,18 @@ module.exports = function(Bittrex) {
             returns: {arg: 'history', type: 'object', root: true},
             http: {verb: 'get', path: '/bittrex/:market/getMarketHistory'}
         }
-    );
+     );
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getMarketSummaries',
         {
             description : "Get Market Summaries",
             returns: {arg: 'summaries', type: 'array', root: true},
             http: {verb: 'get', path: '/bittrex/getMarketSummaries'}
         }
-    );
+     );
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getMarketSummary',
         {
             description : "Get Market Summary",
@@ -258,9 +258,9 @@ module.exports = function(Bittrex) {
             returns: {arg: 'summary', type: 'object', root: true},
             http: {verb: 'get', path: '/bittrex/:market/getMarketSummary'}
         }
-    );
+     );
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getTicker',
         {
             description : "Get Ticker",
@@ -268,9 +268,9 @@ module.exports = function(Bittrex) {
             returns: {arg: 'ticker', type: 'object', root: true},
             http: {verb: 'get', path: '/bittrex/:market/getTicker'}
         }
-    );
+     );
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getOrderBook',
         {
             description : "Get Order Book",
@@ -280,9 +280,9 @@ module.exports = function(Bittrex) {
             returns: {arg: 'summary', type: 'object', root: true},
             http: {verb: 'get', path: '/bittrex/:market/:depth/:type/getOrderBook'}
         }
-    );
+     );
 
-    Bittrex.remoteMethod (
+     Bittrex.remoteMethod (
         'getCandles',
         {
             description : "Get Candles",
@@ -292,5 +292,5 @@ module.exports = function(Bittrex) {
             returns: {arg: 'candles', type: 'object', root: true},
             http: {verb: 'get', path: '/bittrex/:market/:tickInterval/:startTimestamp/getCandles'}
         }
-    );
+     );
 };

@@ -31,18 +31,18 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                 socket.on('connect', function() {
                     $log.info('User connected to socket.io server');
 
-                    // define soket.io channels beetween utrack and utrack-gateway
+                    // define socket.io channels beetween utrack and utrack-gateway
                     $log.info('Subscribed to bittrex-event');
                     socket.on('bittrex-event', function(event) {
-                        //$log.info('event from bittrex-event topic is: ' + event);
-
                         // propagate the message throw event bus
                         Context.emit('bittrex-event', event);
-                    });
 
-                    socket.on("disconnect",function(event) {
-                        $log.info('User disconnected to socket.io server with event: ' + event);
+                        //$log.info('event from bittrex-event topic is: ' + event);
                     });
+                });
+
+                socket.on("disconnect",function(event) {
+                    $log.info('User disconnected to socket.io server with event: ' + event);
                 });
 
                 return socket;
@@ -52,6 +52,53 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             }
         };
     }])
+    .directive('kendoExpandGrid', ['$window', function ($window) {
+        // Define the directive, but restrict its usage to
+        var directive = {
+            link: link,           // The function attaching the behavior
+            restrict: 'A',        // Restrict directive to be used only as attribute
+            scope: {
+                name: '=name',
+                options: '=options',
+                api: '=api'
+            },
+            template: '<div kendo-grid="{{name}}" options="{{options}}"></div>'
+        };
+
+        function link(scope, element, attrs) {
+            var gridElement = $(element);
+
+            scope.api = {
+                setData: function(datasource) {
+                    scope.gridMarkets.dataSource.data(datasource);
+                }
+            };
+
+            // Attach an eventHandler to the resize event of the
+            // window to resize the data area of the grid accordingly
+            $($window).resize(function () {
+                var newHeight = gridElement.innerHeight(),
+                    otherElements = gridElement.children().not(".k-grid-content"),
+                    otherElementsHeight = 0;
+
+                // calculate columns and pagination toobar market grid height
+                otherElements.each(function(){
+                    otherElementsHeight += $(this).outerHeight();
+                });
+
+                var height = $(window).height() - $('#filter').height() - $('#footer').height() - otherElementsHeight - 56;
+
+                // market grid container height calculation:
+                //  -- market filter height
+                //  -- footer height
+                //  -- market grid header and footer
+                //  -- window margin and padding height
+                gridElement.children(".k-grid-content").height(height);
+            });
+        }
+
+        return directive;
+    }])
     .directive('expandKGrid', ['$window', function ($window) {
         // Define the directive, but restrict its usage to
         var directive = {
@@ -59,7 +106,6 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             restrict: 'A',        // Restrict directive to be used only as attribute
             require: 'kendoGrid'  // Ensure the directive is set on a <kendo-grid> element
         };
-        return directive;
 
         function link(scope, element, attrs) {
             var gridElement = $(element);
@@ -67,57 +113,40 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             // Attach an eventHandler to the resize event of the
             // window to resize the data area of the grid accordingly
             $($window).resize(function () {
-                // Get the element wrapping the data
-                var dataElement = gridElement.find('.k-grid-content');
+                var newHeight = gridElement.innerHeight(),
+                    otherElements = gridElement.children().not(".k-grid-content"),
+                    otherElementsHeight = 0;
 
-                // Get all other elements (headers, footers, etc...)
-                var nonDataElements = gridElement.children().not('.k-grid-content');
-
-                // Get the height of the whole grid without any borders or margins
-                var currentGridHeight = gridElement.innerHeight();
-
-                // Get viewport height
-                var viewportHeight = $(window).height();
-
-                var containerHeight = $('#market-container').height();
-
-                // Calculate and set the height for the data area, which is the height of the whole grid less the height taken by all non-data content.
-                var nonDataElementsHeight = 0;
-                nonDataElements.each(function () {
-                    nonDataElementsHeight += $(this).outerHeight();
+                // calculate columns and pagination toobar market grid height
+                otherElements.each(function(){
+                    otherElementsHeight += $(this).outerHeight();
                 });
 
-                //dataElement.height(currentGridHeight - nonDataElementsHeight);
-                //dataElement.height(viewportHeight - nonDataElementsHeight);
-                dataElement.height(100);
+                var height = $(window).height() - $('#filter').height() - $('#footer').height() - otherElementsHeight - 56;
+
+                // market grid container height calculation:
+                //  -- market filter height
+                //  -- footer height
+                //  -- market grid header and footer
+                //  -- window margin and padding height
+                gridElement.children(".k-grid-content").height(height);
             });
         }
+
+        return directive;
     }])
     .controller('mainController', ['$scope', '$log', 'Bittrex', 'Socket', 'Context', function ($scope, $log, Bittrex, Socket, Context) {
         'use strict';
 
+        // configure any kendo widgets before rendered
+        $scope.$on("kendoRendered", function(e) {
+            // set list time intervals to readonly
+            //$scope.comboboxMarketInterval.readonly(true);
+        });
+
         $scope.markets = [];
 
-        /*function resizeGrid() {
-            var gridElement = $('#market-grid');
-
-            // Get the element wrapping the data
-            var dataElement = gridElement.find('.k-grid-content');
-            // Get all other elements (headers, footers, etc...)
-            var nonDataElements = gridElement.children().not('.k-grid-content');
-            // Get the height of the whole grid without any borders or margins
-            var currentGridHeight = gridElement.innerHeight();
-            // Calculate and set the height for the data area, which
-            // is the height of the whole grid less the height taken
-            // by all non-data content.
-            var nonDataElementsHeight = 0;
-            nonDataElements.each(function () {
-                nonDataElementsHeight += $(this).outerHeight();
-            });
-            dataElement.height(currentGridHeight - nonDataElementsHeight);
-        }*/
-
-        // configure kendo ui table
+        // configure kendo-ui table
         $scope.mainGridOptions = {
             toolbar: ["excel", "pdf"],
             excel: {
@@ -178,29 +207,20 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             ]
         };
 
+        // configure kendo-ui header table tooltips
         $scope.toolTipOptions = {
             filter: ".k-header",
             position: "top",
             content: function(e) {
-                if ($scope.gridProducts.columns[e.target.context.cellIndex] !== undefined)
-                    var content = $scope.gridProducts.columns[e.target.context.cellIndex].title;
+                if ($scope.gridMarkets.columns[e.target.context.cellIndex] !== undefined)
+                    var content = $scope.gridMarkets.columns[e.target.context.cellIndex].title;
 
                 return content;
             }
         };
 
-        // configure kendo widgets before rendered
-        $scope.$on("kendoRendered", function(e) {
-            // set list time intervals to readonly
-            //$scope.comboboxMarketInterval.readonly(true);
-        });
-
-        // load graph summary
+        // load market candles
         $scope.onGraphClick = function (event) {
-            // create data table on loaded data
-            var dataTable = anychart.data.table();
-
-            // get candles from startTimestamp
             Bittrex.getCandles({market: 'BTC-LTC', tickInterval: 'fiveMin', startTimestamp: $scope.startTimestamp})
                 .$promise
                 .then(function(candles, responseHeaders) {
@@ -209,17 +229,20 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                         else
                             $scope.candles = [];
 
+                        // create data table on loaded data
+                        var dataTable = anychart.data.table();
+
+                        // refresh anyChart datasource
                         $log.info($scope.candles.length + ' candles recovered');
                     },
                     function(httpResponse) {
                         var error = httpResponse.data.error;
-                        $log.error('Error querying markets - ' + error.status + ": " + error.message);
+                        $log.error('Error querying candles - ' + error.status + ": " + error.message);
                     });
         };
 
         // load market summary
         $scope.onMarketClick = function (event) {
-            // get Bittrex markets summary
             Bittrex.getMarketSummaries()
                 .$promise
                 .then(function(markets, responseHeaders) {
@@ -229,7 +252,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                         $scope.markets = [];
 
                     // refresh grid datasource
-                    $scope.gridProducts.dataSource.data($scope.markets);
+                    $scope.gridMarkets.dataSource.data($scope.markets);
 
                     $log.info($scope.markets.length + ' markets recovered');
                 },
@@ -245,7 +268,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         // subscribe socket.io client to bittrex-event topic
         var cleanUpFuncBittrexEventConfirm = Context.subscribe('bittrex-event', function(event, markets) {
             // refresh grid datasource markets
-            $scope.gridProducts.dataSource.data(markets);
+            $scope.gridMarkets.dataSource.data(markets);
         });
 
         // unsubscribe socket.io client to bittrex-event topic

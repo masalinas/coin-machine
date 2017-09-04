@@ -1,9 +1,6 @@
-/*#market-grid {
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    height: 100%;
-}*/
+main {
+    overflow-y: auto;
+}
 
 footer {
     background-color: #ccc;
