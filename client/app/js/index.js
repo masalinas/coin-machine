@@ -105,7 +105,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         $scope.markets = [];
 
         // configure kendo-ui table
-        $scope.mainGridOptions = {
+        $scope.optionsGrid = {
             toolbar: ["excel", "pdf"],
             excel: {
                 fileName: "Markets Export.xlsx",
@@ -170,8 +170,8 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             filter: ".k-header",
             position: "top",
             content: function(e) {
-                if ($scope.gridMarkets.columns[e.target.context.cellIndex] !== undefined)
-                    var content = $scope.gridMarkets.columns[e.target.context.cellIndex].title;
+                if ($scope.marketGrid.columns[e.target.context.cellIndex] !== undefined)
+                    var content = $scope.marketGrid.columns[e.target.context.cellIndex].title;
 
                 return content;
             }
@@ -210,7 +210,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                         $scope.markets = [];
 
                     // refresh grid datasource
-                    $scope.gridMarkets.dataSource.data($scope.markets);
+                    $scope.marketGrid.dataSource.data($scope.markets);
 
                     $log.info($scope.markets.length + ' markets recovered');
                 },
@@ -226,7 +226,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         // subscribe socket.io client to bittrex-event topic
         var cleanUpFuncBittrexEventConfirm = Context.subscribe('bittrex-event', function(event, markets) {
             // refresh grid datasource markets
-            $scope.gridMarkets.dataSource.data(markets);
+            $scope.marketGrid.dataSource.data(markets);
         });
 
         // unsubscribe socket.io client to bittrex-event topic
