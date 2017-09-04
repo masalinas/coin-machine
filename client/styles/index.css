@@ -1,7 +1,7 @@
-main {
+#market-main {
     overflow-y: auto;
 }
 
-footer {
+#market-footer {
     background-color: #ccc;
 }

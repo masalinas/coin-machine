@@ -52,46 +52,6 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             }
         };
     }])
-    .directive('kendoExpandGrid', ['$window', function ($window) {
-        // Define the directive, but restrict its usage to
-        var directive = {
-            link: link,           // The function attaching the behavior
-            restrict: 'A',        // Restrict directive to be used only as attribute
-            scope: {
-                name: '=name',
-                options: '=options'
-            },
-            template: '<div kendo-grid="{{name}}" options="{{options}}"></div>'
-        };
-
-        function link(scope, element, attrs) {
-            var gridElement = $(element);
-
-            // Attach an eventHandler to the resize event of the
-            // window to resize the data area of the grid accordingly
-            $($window).resize(function () {
-                var newHeight = gridElement.innerHeight(),
-                    otherElements = gridElement.children().not(".k-grid-content"),
-                    otherElementsHeight = 0;
-
-                // calculate columns and pagination toobar market grid height
-                otherElements.each(function(){
-                    otherElementsHeight += $(this).outerHeight();
-                });
-
-                var height = $(window).height() - $('#filter').height() - $('#footer').height() - otherElementsHeight - 56;
-
-                // market grid container height calculation:
-                //  -- market filter height
-                //  -- footer height
-                //  -- market grid header and footer
-                //  -- window margin and padding height
-                gridElement.children(".k-grid-content").height(height);
-            });
-        }
-
-        return directive;
-    }])
     .directive('expandKGrid', ['$window', '$timeout', function ($window, $timeout) {
         // Define the directive, but restrict its usage to
         var directive = {
@@ -101,11 +61,9 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         };
 
         function link(scope, element, attrs) {
-            var gridElement = $(element);
-
             function resize() {
-                var newHeight = gridElement.innerHeight(),
-                    otherElements = gridElement.children().not(".k-grid-content"),
+                var newHeight = element.innerHeight(),
+                    otherElements = element.children().not(".k-grid-content"),
                     otherElementsHeight = 0;
 
                 // calculate columns and pagination toobar market grid height
@@ -113,25 +71,24 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                     otherElementsHeight += $(this).outerHeight();
                 });
 
-                var height = $(window).height() - $('#filter').height() - $('#footer').height() - otherElementsHeight - 56;
+                var height = $(window).height() - $('#market-filter').height() - $('#market-footer').height() - otherElementsHeight - 56;
 
                 // market grid container height calculation:
                 //  -- market filter height
                 //  -- footer height
                 //  -- market grid header and footer
                 //  -- window margin and padding height
-                gridElement.children(".k-grid-content").height(height);
+                element.children(".k-grid-content").height(height);
             }
 
-            // Attach an eventHandler to the resize event of the
-            // window to resize the data area of the grid accordingly
+            // Attach an eventHandler to the resize event of the window to resize the data area of the grid accordingly
             $($window).resize(function () {
                 resize();
             });
 
             $timeout(function() {
                 resize();
-            }, 1000);
+            }, 500);
         }
 
         return directive;

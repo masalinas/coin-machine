@@ -24,8 +24,8 @@
     </head>
     <body>
         <div layout="column" layout-fill ng-controller="mainController" ng-cloak>
-            <main id="main" layout-padding flex>
-                <div id="filter" layout="row" layout-padding>
+            <main id="market-main" layout-padding flex>
+                <div id="market-filter" layout="row" layout-padding>
                     <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..."
                             style="padding-left: 0; width: 280px; background-color: transparent">
                         <option>Última sesión - Tick a tick</option>
@@ -57,16 +57,16 @@
 
                 <div kendo-tooltip k-options="toolTipOptions" flex>
                     <div id="market-grid" kendo-grid="gridMarkets" options="mainGridOptions" expand-k-grid></div>
-                    <!--<div id="market-expand-grid" kendo-expand-grid name="gridMarkets" options="mainGridOptions"></div>-->
                 </div>
             </main>
 
-            <footer id="footer">
+            <footer id="market-footer">
                 <div layout="row" layout-align="center center">
                     <h2>My Fix Footer</h2>
                 </div>
             </footer>
         </div>
+
         <!-- Jquery dependencies -->
         <script type="text/javascript" src="vendor/jquery.min.js"></script>
 
