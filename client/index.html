@@ -26,8 +26,7 @@
         <div layout="column" layout-fill ng-controller="mainController" ng-cloak>
             <main id="market-main" layout-padding flex>
                 <div id="market-filter" layout="row" layout-padding>
-                    <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..."
-                            style="padding-left: 0; width: 280px; background-color: transparent">
+                    <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..." style="padding-left: 0; width: 280px; background-color: transparent">
                         <option>Última sesión - Tick a tick</option>
                         <option>Últimas 8 sesiones - 1 Minuto</option>
                         <option>Últimos 3 meses - 5 Minutos</option>
@@ -41,7 +40,7 @@
                     </select>
 
                     <label>
-                        Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" ng-model="startTimestamp"/>
+                        Start Date: <input kendo-date-time-picker="datetimepickerMarketStartTime" k-ng-model="startTimestamp"/>
                     </label>
 
                     <input kendo-numerictextbox="numerictextboxMarket" k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'"/>

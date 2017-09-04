@@ -102,7 +102,11 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             //$scope.comboboxMarketInterval.readonly(true);
         });
 
+        // initialize markers collection
         $scope.markets = [];
+
+        // initialize filter date
+        $scope.startTimestamp = new Date();
 
         // configure kendo-ui table
         $scope.optionsGrid = {
