@@ -107,6 +107,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
 
         // initialize filter date
         $scope.startTimestamp = new Date();
+        $scope.quantity = 1;
 
         // configure kendo-ui table
         $scope.optionsGrid = {
