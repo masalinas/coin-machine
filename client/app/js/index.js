@@ -105,7 +105,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         // initialize markers collection
         $scope.markets = [];
 
-        // initialize filter date
+        // initialize filter values
         $scope.startTimestamp = new Date();
         $scope.quantity = 1;
 
