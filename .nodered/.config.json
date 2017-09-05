@@ -456,7 +456,10 @@
       "CDLBELTHOLD",
       "CDLBREAKAWAY",
       "CDLCLOSINGMARUBOZU",
-      "CDLCONCEALBABYSWALL"
+      "CDLCONCEALBABYSWALL",
+      "CDLCOUNTERATTACK",
+      "CDLDARKCLOUDCOVER",
+      "CDLDOJI"
      ],
      "enabled": true,
      "local": false,
