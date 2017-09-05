@@ -1,10 +1,7 @@
-/*#market-grid {
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    height: 100%;
-}*/
+#market-main {
+    overflow-y: auto;
+}
 
-footer {
+#market-footer {
     background-color: #ccc;
 }
