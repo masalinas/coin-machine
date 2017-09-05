@@ -155,8 +155,8 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             sortable: true,
             filterable: true,
             resizable: true,
+            selectable: true,
             columnMenu: true,
-
             pageable: {
                 input: true,
                 numeric: false
