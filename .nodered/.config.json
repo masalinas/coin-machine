@@ -366,7 +366,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-email",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-node-email/61-email.js"
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red/node_modules/node-red-node-email/61-email.js"
     }
    }
   },
@@ -383,7 +383,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-feedparser",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-node-feedparser/32-feedparse.js"
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red/node_modules/node-red-node-feedparser/32-feedparse.js"
     }
    }
   },
@@ -400,7 +400,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-rbe",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-node-rbe/rbe.js"
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red/node_modules/node-red-node-rbe/rbe.js"
     }
    }
   },
@@ -419,7 +419,44 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-twitter",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-node-twitter/27-twitter.js"
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red/node_modules/node-red-node-twitter/27-twitter.js"
+    }
+   }
+  },
+  "node-red-talib": {
+   "name": "node-red-talib",
+   "version": "1.0.0",
+   "local": false,
+   "nodes": {
+    "sample": {
+     "name": "sample",
+     "types": [
+      "AD",
+      "ADOSC",
+      "ADX",
+      "ADXR",
+      "APO",
+      "AROON",
+      "AROONOSC",
+      "ATR",
+      "AVGPRICE",
+      "BBANDS",
+      "BETA",
+      "BOP",
+      "CCI",
+      "CDL2CROWS",
+      "CDL3BLACKCROWS",
+      "CDL3INSIDE",
+      "CDL3LINESTRIKE",
+      "CDL3OUTSIDE",
+      "CDL3STARSINSOUTH",
+      "CDL3WHITESOLDIERS",
+      "CDLABANDONEDBABY"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-talib",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-talib/talib/talib.js"
     }
    }
   }
