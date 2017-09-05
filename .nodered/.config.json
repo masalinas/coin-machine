@@ -451,7 +451,12 @@
       "CDL3OUTSIDE",
       "CDL3STARSINSOUTH",
       "CDL3WHITESOLDIERS",
-      "CDLABANDONEDBABY"
+      "CDLABANDONEDBABY",
+      "CDLADVANCEBLOCK",
+      "CDLBELTHOLD",
+      "CDLBREAKAWAY",
+      "CDLCLOSINGMARUBOZU",
+      "CDLCONCEALBABYSWALL"
      ],
      "enabled": true,
      "local": false,
