@@ -459,7 +459,14 @@
       "CDLCONCEALBABYSWALL",
       "CDLCOUNTERATTACK",
       "CDLDARKCLOUDCOVER",
-      "CDLDOJI"
+      "CDLDOJI",
+      "CDLDOJISTAR",
+      "CDLDRAGONFLYDOJI",
+      "CDLENGULFING",
+      "CDLEVENINGDOJISTAR",
+      "CDLEVENINGSTAR",
+      "CDLGAPSIDESIDEWHITE",
+      "CDLGRAVESTONEDOJI"
      ],
      "enabled": true,
      "local": false,
