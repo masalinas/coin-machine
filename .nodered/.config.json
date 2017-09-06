@@ -472,7 +472,14 @@
       "CDLHARAMI",
       "CDLHARAMICROSS",
       "CDLHIGHWAVE",
-      "CDLHIKKAKE"
+      "CDLHIKKAKE",
+      "CDLHIKKAKEMOD",
+      "CDLHOMINGPIGEON",
+      "CDLIDENTICAL3CROWS",
+      "CDLINNECK",
+      "CDLINVERTEDHAMMER",
+      "CDLKICKING",
+      "CDLKICKINGBYLENGTH"
      ],
      "enabled": true,
      "local": false,
