@@ -491,7 +491,14 @@
       "CDLONNECK",
       "CDLPIERCING",
       "CDLRICKSHAWMAN",
-      "CDLRISEFALL3METHODS"
+      "CDLRISEFALL3METHODS",
+      "CDLSEPARATINGLINES",
+      "CDLSHOOTINGSTAR",
+      "CDLSHORTLINE",
+      "CDLSPINNINGTOP",
+      "CDLSTALLEDPATTERN",
+      "CDLSTICKSANDWICH",
+      "CDLTAKURI"
      ],
      "enabled": true,
      "local": false,
