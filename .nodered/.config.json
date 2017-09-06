@@ -488,7 +488,10 @@
       "CDLMATHOLD",
       "CDLMORNINGDOJISTAR",
       "CDLMORNINGSTAR",
-      "CDLONNECK"
+      "CDLONNECK",
+      "CDLPIERCING",
+      "CDLRICKSHAWMAN",
+      "CDLRISEFALL3METHODS"
      ],
      "enabled": true,
      "local": false,
