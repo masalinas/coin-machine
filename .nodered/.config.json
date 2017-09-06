@@ -479,7 +479,16 @@
       "CDLINNECK",
       "CDLINVERTEDHAMMER",
       "CDLKICKING",
-      "CDLKICKINGBYLENGTH"
+      "CDLKICKINGBYLENGTH",
+      "CDLLADDERBOTTOM",
+      "CDLLONGLEGGEDDOJI",
+      "CDLLONGLINE",
+      "CDLMARUBOZU",
+      "CDLMATCHINGLOW",
+      "CDLMATHOLD",
+      "CDLMORNINGDOJISTAR",
+      "CDLMORNINGSTAR",
+      "CDLONNECK"
      ],
      "enabled": true,
      "local": false,
