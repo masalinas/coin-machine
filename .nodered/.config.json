@@ -498,7 +498,13 @@
       "CDLSPINNINGTOP",
       "CDLSTALLEDPATTERN",
       "CDLSTICKSANDWICH",
-      "CDLTAKURI"
+      "CDLTAKURI",
+      "CDLTASUKIGAP",
+      "CDLTHRUSTING",
+      "CDLTRISTAR",
+      "CDLUNIQUE3RIVER",
+      "CDLUPSIDEGAP2CROWS",
+      "CDLXSIDEGAP3METHODS"
      ],
      "enabled": true,
      "local": false,
