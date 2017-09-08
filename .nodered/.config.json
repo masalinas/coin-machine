@@ -516,7 +516,11 @@
       "HT_SINE",
       "HT_TRENDLINE",
       "HT_TRENDMODE",
-      "KAMA"
+      "KAMA",
+      "LINEARREG",
+      "LINEARREG_ANGLE",
+      "LINEARREG_INTERCEPT",
+      "LINEARREG_SLOPE"
      ],
      "enabled": true,
      "local": false,
