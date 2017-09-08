@@ -520,7 +520,9 @@
       "LINEARREG",
       "LINEARREG_ANGLE",
       "LINEARREG_INTERCEPT",
-      "LINEARREG_SLOPE"
+      "LINEARREG_SLOPE",
+      "MA",
+      "MACD"
      ],
      "enabled": true,
      "local": false,
