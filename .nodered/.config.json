@@ -515,7 +515,8 @@
       "HT_PHASOR",
       "HT_SINE",
       "HT_TRENDLINE",
-      "HT_TRENDMODE"
+      "HT_TRENDMODE",
+      "KAMA"
      ],
      "enabled": true,
      "local": false,
