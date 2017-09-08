@@ -6,7 +6,8 @@ var argv = require('minimist')(process.argv.slice(2));
 // bittrex secret tokens
 bittrex.options({
     'apikey' : argv.k,
-    'apisecret' : argv.s
+    'apisecret' : argv.s,
+    'verbose' : true
 });
 
 module.exports = function(Bittrex) {
@@ -18,6 +19,18 @@ module.exports = function(Bittrex) {
             });
         }
     });
+
+    websocketsclient.serviceHandlers.connectFailed = function(error) {
+        console.log("Websocket connectFailed: ", error);
+    };
+
+    websocketsclient.serviceHandlers.onerror = function(error) {
+        console.log("Websocket error: ", error);
+    };
+
+    websocketsclient.serviceHandlers.connectionLost = function(error) {
+        console.log("Connection Lost: ", error);
+    };
 
     // publish Bittrex API
     /**

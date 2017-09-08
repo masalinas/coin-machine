@@ -523,7 +523,10 @@
       "LINEARREG_SLOPE",
       "MA",
       "MACD",
-      "MACDEXT"
+      "MACDEXT",
+      "MACDFIX",
+      "MAMA",
+      "MAX"
      ],
      "enabled": true,
      "local": false,
