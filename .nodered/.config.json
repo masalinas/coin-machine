@@ -522,7 +522,8 @@
       "LINEARREG_INTERCEPT",
       "LINEARREG_SLOPE",
       "MA",
-      "MACD"
+      "MACD",
+      "MACDEXT"
      ],
      "enabled": true,
      "local": false,
