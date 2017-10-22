@@ -528,7 +528,12 @@
       "MAMA",
       "MAX",
       "MAXINDEX",
-      "MEDPRICE"
+      "MEDPRICE",
+      "MFI",
+      "MIDPOINT",
+      "MIDPRICE",
+      "MIN",
+      "MININDEX"
      ],
      "enabled": true,
      "local": false,
