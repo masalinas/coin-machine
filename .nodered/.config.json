@@ -548,7 +548,15 @@
       "ROCP",
       "ROCR",
       "ROCR100",
-      "RSI"
+      "RSI",
+      "SAR",
+      "SAREXT",
+      "SMA",
+      "STDDEV",
+      "STOCH",
+      "STOCHF",
+      "STOCHRSI",
+      "SUM"
      ],
      "enabled": true,
      "local": false,
