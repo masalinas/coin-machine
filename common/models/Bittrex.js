@@ -1,4 +1,4 @@
-var bittrex = require('node.bittrex.api');
+var bittrex = require('node-bittrex-api');
 var app = require('../../server/server');
 
 var argv = require('minimist')(process.argv.slice(2));
@@ -12,25 +12,25 @@ bittrex.options({
 
 module.exports = function(Bittrex) {
     // listen to Bittrex WebSocket
-    var websocketsclient = bittrex.websockets.listen( function( data ) {
+    bittrex.websockets.listen( function( data, client) {
         if (data.M === 'updateSummaryState') {
             data.A.forEach(function(data_for) {
                 app.io.emit('bittrex-event', data_for.Deltas);
             });
         }
+
+        client.serviceHandlers.connectFailed = function(error) {
+            console.log("Websocket connectFailed: ", error);
+        };
+
+        client.serviceHandlers.onerror = function(error) {
+            console.log("Websocket error: ", error);
+        };
+
+        client.serviceHandlers.connectionLost = function(error) {
+            console.log("Connection Lost: ", error);
+        };
     });
-
-    websocketsclient.serviceHandlers.connectFailed = function(error) {
-        console.log("Websocket connectFailed: ", error);
-    };
-
-    websocketsclient.serviceHandlers.onerror = function(error) {
-        console.log("Websocket error: ", error);
-    };
-
-    websocketsclient.serviceHandlers.connectionLost = function(error) {
-        console.log("Connection Lost: ", error);
-    };
 
     // publish Bittrex API
     /**
