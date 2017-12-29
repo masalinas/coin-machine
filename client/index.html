@@ -24,7 +24,9 @@
     </head>
     <body>
         <div layout="column" layout-fill ng-controller="mainController" ng-cloak>
+            <!-- main layout -->
             <main id="market-main" layout-padding flex>
+                <!-- header layout -->
                 <div id="market-filter" layout="row" layout-padding>
                     <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..." style="padding-left: 0; width: 280px; background-color: transparent">
                         <option>Última sesión - Tick a tick</option>
@@ -55,11 +57,33 @@
                     <!--<kendo-button class="k-primary" icon="'funnel-clear'" ng-click="onMarketClick($event)">Get Markets</kendo-button>-->
                 </div>
 
-                <div kendo-tooltip k-options="toolTipOptions" flex>
-                    <div id="market-grid" kendo-grid="marketGrid" options="optionsGrid" expand-k-grid></div>
+                <!-- dashboard layout-->
+                <div id="market-body" kendo-tab-strip k-content-urls="[ null, null]">
+                    <!-- tab list -->
+                    <ul>
+                        <li class="k-state-active">Ticker</li>
+                        <li>Graph</li>
+                    </ul>
+
+                    <!-- Stock Ticker tab -->
+                    <div style="padding: 1em">
+                        <div kendo-tooltip k-options="toolTipOptions" flex>
+                            <div id="market-grid" kendo-grid="marketGrid" options="optionsGrid" expand-k-grid></div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Candlestick tab -->
+                    <div style="padding: 1em">
+                        <div anystock
+                             ac-title="Simple Candlestick"
+                             ac-instance="stock"
+                             style="width: 100%; height: 500px">
+                        </div>
+                    </div>
                 </div>
             </main>
 
+            <!-- footer layout-->
             <footer id="market-footer">
                 <div layout="row" layout-align="center center">
                     <h2>My Fix Footer</h2>
@@ -84,16 +108,17 @@
         <!-- Google Material dependencies (only for layout) -->
         <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
 
-        <!-- Telerik Kendo UI dependencies-->
+        <!-- Telerik Kendo UI dependencies -->
         <script type="text/javascript" src="vendor/kendo.all.min.js"></script>
         <script type="text/javascript" src="vendor/jszip.min.js"></script>
 
-        <!-- AnyChart dependencies-->
+        <!-- AnyChart dependencies -->
         <script type="text/javascript" src="vendor/anychart-ui.min.js"></script>
         <script type="text/javascript" src="vendor/anystock.min.js"></script>
+        <script type="text/javascript" src="bower_components/anychart-angularjs/dist/anychart-angularjs.js"></script>
 
         <!-- Load socket.io client client from server -->
-        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
         <!-- Application services package -->
         <script type="text/javascript" src="app/js/lb-services.js"></script>

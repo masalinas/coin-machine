@@ -423,13 +423,40 @@
     }
    }
   },
-  "node-red-talib": {
-   "name": "node-red-talib",
-   "version": "1.0.0",
+  "node-red-contrib-bittrex": {
+   "name": "node-red-contrib-bittrex",
+   "version": "0.0.1",
    "local": false,
    "nodes": {
-    "sample": {
-     "name": "sample",
+    "bittrex-websocket": {
+     "name": "bittrex-websocket",
+     "types": [
+      "bittrex-websocket"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-bittrex",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-bittrex/bittrex/bittrex-websocket.js"
+    },
+    "bittrex-api": {
+     "name": "bittrex-api",
+     "types": [
+      "bittrex-api"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-bittrex",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-bittrex/bittrex/bittrex-api.js"
+    }
+   }
+  },
+  "node-red-contrib-talib": {
+   "name": "node-red-contrib-talib",
+   "version": "0.0.1",
+   "local": false,
+   "nodes": {
+    "talib": {
+     "name": "talib",
      "types": [
       "AD",
       "ADOSC",
@@ -571,8 +598,8 @@
      ],
      "enabled": true,
      "local": false,
-     "module": "node-red-talib",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-talib/talib/talib.js"
+     "module": "node-red-contrib-talib",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-talib/talib/talib.js"
     }
    }
   }

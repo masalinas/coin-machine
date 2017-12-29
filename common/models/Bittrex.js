@@ -3,33 +3,47 @@ var app = require('../../server/server');
 
 var argv = require('minimist')(process.argv.slice(2));
 
-// bittrex secret tokens
-bittrex.options({
-    'apikey' : argv.k,
-    'apisecret' : argv.s,
-    'verbose' : true
-});
-
 module.exports = function(Bittrex) {
-    // listen to Bittrex WebSocket
-    bittrex.websockets.listen( function( data, client) {
-        if (data.M === 'updateSummaryState') {
-            data.A.forEach(function(data_for) {
-                app.io.emit('bittrex-event', data_for.Deltas);
-            });
+    var websocketClient;
+
+    bittrex.options({
+        apikey : argv.k,
+        apisecret : argv.s,
+        websockets: {
+            onConnect: function() {
+                console.log('Websocket connected');
+
+                websocketClient.serviceHandlers.connectFailed = function(error) {
+                    console.log("Websocket connectFailed: ", error);
+                };
+
+                websocketClient.serviceHandlers.onerror = function(error) {
+                    console.log("Websocket error: ", error);
+                };
+
+                websocketClient.serviceHandlers.connectionLost = function(error) {
+                    console.log("Connection Lost: ", error);
+                };
+
+                bittrex.websockets.listen(function(data, client) {
+                    if (data.M === 'updateSummaryState') {
+                        data.A.forEach(function(data_for) {
+                            data.A.forEach(function(data_for) {
+                                // publish exchange data on bittrex-event websocket topic
+                                app.io.emit('bittrex-event', data_for.Deltas);
+                            });
+                        });
+                    }
+                });
+            },
+            onDisconnect: function() {
+                console.log('Websocket disconnected');
+            }
         }
+    });
 
-        client.serviceHandlers.connectFailed = function(error) {
-            console.log("Websocket connectFailed: ", error);
-        };
-
-        client.serviceHandlers.onerror = function(error) {
-            console.log("Websocket error: ", error);
-        };
-
-        client.serviceHandlers.connectionLost = function(error) {
-            console.log("Connection Lost: ", error);
-        };
+    bittrex.websockets.client(function(client) {
+        websocketClient = client;
     });
 
     // publish Bittrex API
