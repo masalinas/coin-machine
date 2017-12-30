@@ -1,0 +1,81 @@
+{
+    "name": "Tick",
+    "description": "Tick Service",
+    "plural": "Ticks",
+    "base": "PersistedModel",
+    "options": {
+        "validateUpsert": true
+    },
+    "scope": {},
+    "properties": {
+        "MarketName": {
+            "type": "string",
+            "required": true,
+            "comments": "Market Name"
+        },
+        "High": {
+            "type": "number",
+            "required": true,
+            "comments": "High"
+        },
+        "Low": {
+            "type": "number",
+            "required": true,
+            "comments": "Low"
+        },
+        "Volume": {
+            "type": "number",
+            "required": true,
+            "comments": "Volume"
+        },
+        "Last": {
+            "type": "number",
+            "required": true,
+            "comments": "Last"
+        },
+        "BaseVolume": {
+            "type": "number",
+            "required": true,
+            "comments": "Base Volume"
+        },
+        "TimeStamp": {
+            "type": "date",
+            "required": true,
+            "comments": "TimeStamp"
+        },
+        "Bid": {
+            "type": "number",
+            "required": true,
+            "comments": "Bid"
+        },
+        "Ask": {
+            "type": "number",
+            "required": true,
+            "comments": "Ask"
+        },
+        "OpenBuyOrders": {
+            "type": "number",
+            "required": true,
+            "comments": "Open Buy Orders"
+        },
+        "OpenSellOrders": {
+            "type": "number",
+            "required": true,
+            "comments": "Open Sell Orders"
+        },
+        "PrevDay": {
+            "type": "number",
+            "required": true,
+            "comments": "Previous Day"
+        },
+        "Created": {
+            "type": "date",
+            "required": true,
+            "comments": "Created"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}
