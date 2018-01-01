@@ -423,30 +423,20 @@
     }
    }
   },
-  "node-red-contrib-bittrex": {
-   "name": "node-red-contrib-bittrex",
-   "version": "0.0.1",
+  "node-red-contrib-excel": {
+   "name": "node-red-contrib-excel",
+   "version": "0.0.3",
    "local": false,
    "nodes": {
-    "bittrex-websocket": {
-     "name": "bittrex-websocket",
+    "xlsx": {
+     "name": "xlsx",
      "types": [
-      "bittrex-websocket"
+      "excel"
      ],
      "enabled": true,
      "local": false,
-     "module": "node-red-contrib-bittrex",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-bittrex/bittrex/bittrex-websocket.js"
-    },
-    "bittrex-api": {
-     "name": "bittrex-api",
-     "types": [
-      "bittrex-api"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red-contrib-bittrex",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-bittrex/bittrex/bittrex-api.js"
+     "module": "node-red-contrib-excel",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-excel/excel/excel.js"
     }
    }
   },
@@ -600,6 +590,33 @@
      "local": false,
      "module": "node-red-contrib-talib",
      "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-talib/talib/talib.js"
+    }
+   }
+  },
+  "node-red-contrib-bittrex": {
+   "name": "node-red-contrib-bittrex",
+   "version": "0.0.1",
+   "local": false,
+   "nodes": {
+    "bittrex-websocket": {
+     "name": "bittrex-websocket",
+     "types": [
+      "bittrex-websocket"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-bittrex",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-bittrex/bittrex/bittrex-websocket.js"
+    },
+    "bittrex-api": {
+     "name": "bittrex-api",
+     "types": [
+      "bittrex-api"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-bittrex",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-bittrex/bittrex/bittrex-api.js"
     }
    }
   }
