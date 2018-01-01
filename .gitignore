@@ -57,7 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
-# webstorm project files
+# webstorm project metadata
 .idea
-
-package-lock.json
