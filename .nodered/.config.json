@@ -450,6 +450,23 @@
     }
    }
   },
+  "node-red-contrib-ccxt": {
+   "name": "node-red-contrib-ccxt",
+   "version": "0.0.1",
+   "local": false,
+   "nodes": {
+    "ccxt-api": {
+     "name": "ccxt-api",
+     "types": [
+      "ccxt-api"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-ccxt",
+     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-ccxt/ccxt/ccxt-api.js"
+    }
+   }
+  },
   "node-red-contrib-talib": {
    "name": "node-red-contrib-talib",
    "version": "0.0.1",
@@ -600,33 +617,6 @@
      "local": false,
      "module": "node-red-contrib-talib",
      "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-talib/talib/talib.js"
-    }
-   }
-  },
-  "node-red-contrib-ccxt": {
-   "name": "node-red-contrib-ccxt",
-   "version": "0.0.1",
-   "local": false,
-   "nodes": {
-    "ccxt-websocket": {
-     "name": "ccxt-websocket",
-     "types": [
-      "ccxt-api"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red-contrib-ccxt",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-ccxt/ccxt/ccxt-api.js"
-    },
-    "ccxt-api": {
-     "name": "ccxt-api",
-     "types": [
-      "ccxt-api"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red-contrib-ccxt",
-     "file": "/home/miguel/git/coin-machine/node_modules/node-red-contrib-ccxt/ccxt/ccxt-api.js"
     }
    }
   }

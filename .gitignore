@@ -59,3 +59,5 @@ typings/
 
 # webstorm project files
 .idea
+
+package-lock.json

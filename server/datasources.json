@@ -1,1 +1,11 @@
-{}
+{
+  "coinmachine": {
+    "host": "localhost",
+    "port": 27017,
+    "name": "coinmachine",
+    "database": "coinmachine",
+    "username": "",
+    "password": "",
+    "connector": "mongodb"
+  }
+}
