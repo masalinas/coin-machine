@@ -59,7 +59,8 @@ boot(app, __dirname, function(err) {
             functionGlobalContext: {
                 fs: require('fs'),
                 moment: require('moment'),
-                loopback: app
+                loopback: app,
+                io: app.io
             }
         };
 

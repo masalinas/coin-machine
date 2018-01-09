@@ -32,10 +32,18 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                     $log.info('User connected to socket.io server');
 
                     // define socket.io channels beetween utrack and utrack-gateway
-                    $log.info('Subscribed to bittrex-event');
                     socket.on('bittrex-event', function(event) {
+                        $log.info('Subscribed to bittrex-event');
+
                         // propagate the message throw event bus
                         Context.emit('bittrex-event', event);
+                    });
+
+                    socket.on('bittrex-ohlcv', function(event) {
+                        $log.info('Subscribed to bittrex-ohlcv');
+
+                        // propagate the message throw event bus
+                        Context.emit('bittrex-ohlcv', event);
                     });
                 });
 
@@ -91,7 +99,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
 
         return directive;
     }])
-    .controller('mainController', ['$scope', '$log', 'Bittrex', 'Socket', 'Context', function ($scope, $log, Bittrex, Socket, Context) {
+    .controller('mainController', ['$scope', '$log', 'Bittrex', 'Socket', 'Context', 'AnychartService', function ($scope, $log, Bittrex, Socket, Context, AnychartService) {
         'use strict';
 
         // configure any kendo widgets before rendered
@@ -257,13 +265,13 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         mapping.addField('close', 4, 'last');
         mapping.addField('value', 4, 'last');
 
-        var chart = anychart.stock();
+        $scope.chartInstance = anychart.stock();
 
         // set the series type
         //chart.plot(0).ohlc(mapping).name('ACME Corp.');
-        chart.plot(0).candlestick(mapping).name('ACME Corp.');
+        $scope.chartInstance.plot(0).candlestick(mapping).name('ACME Corp.');
 
-        $scope.stock = chart;
+        $scope.stock =  $scope.chartInstance;
 
         // connect socket.io client to socket server
         Socket.connect();
@@ -274,8 +282,36 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
             $scope.marketGrid.dataSource.data(data);
         });
 
-        // unsubscribe socket.io client to bittrex-event topic on destroy
+        var cleanUpFuncBittrexOHLCVConfirm = Context.subscribe('bittrex-ohlcv', function(event, data) {
+            // refresh candelstick graph datasource
+            if (AnychartService.chart) {
+                // refresh the data in the stock series already created
+                AnychartService.chart.plot(0).getSeries(0).data(data);
+
+                /*var table = anychart.data.table();
+
+                table.addData(data);
+
+                // mapping the data
+                var mapping = table.mapAs();
+
+                mapping.addField('open', 1, 'first');
+                mapping.addField('high', 2, 'max');
+                mapping.addField('low', 3, 'min');
+                mapping.addField('close', 4, 'last');
+                mapping.addField('value', 4, 'last');*/
+
+                // remove all series
+                /*AnychartService.chart.plot(0).removeAllSeries();
+
+                // add the new series with the new data
+                AnychartService.chart.plot(0).candlestick(mapping).name('ACME Corp.');*/
+            }
+        });
+
+        // unsubscribe socket.io client to bittrex-event and bittrex-ohlcv topic on destroy
         $scope.$on('$destroy', function() {
             cleanUpFuncBittrexEventConfirm();
+            cleanUpFuncBittrexOHLCVConfirm();
         });
     }]);
