@@ -31,7 +31,7 @@ boot(app, __dirname, function(err) {
     if (require.main === module) {
         var server = app.start();
 
-        // start socket.io server and publish under loopback
+        // start socket.io server and publish under loopback app
         app.io = require('socket.io')(server);
 
         // Create the settings object - see default settings.js file for other options

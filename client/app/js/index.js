@@ -39,11 +39,18 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                         Context.emit('bittrex-event', event);
                     });
 
-                    socket.on('bittrex-ohlcv', function(event) {
-                        $log.info('Subscribed to bittrex-ohlcv');
+                    socket.on('ccxt-ohlcv', function(event) {
+                        $log.info('Subscribed to ccxt-ohlcv');
 
                         // propagate the message throw event bus
-                        Context.emit('bittrex-ohlcv', event);
+                        Context.emit('ccxt-ohlcv', event);
+                    });
+
+                    socket.on('ccxt-tickers', function(event) {
+                        $log.info('Subscribed to ccxt-tickers');
+
+                        // propagate the message throw event bus
+                        Context.emit('ccxt-tickers', event);
                     });
                 });
 
@@ -115,7 +122,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         $scope.startTimestamp = new Date();
         $scope.quantity = 1;
 
-        // configure kendo-ui table
+        // configure kendo-ui table for bittrex source
         $scope.optionsGrid = {
             toolbar: ["excel", "pdf"],
             excel: {
@@ -166,13 +173,65 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                 { field: "Volume", title: "Volume"},
                 { field: "Last", title: "Last"},
                 { field: "BaseVolume", title: "Base Volume"},
-                { field: "TimeStamp", title: "TimeStamp", template: '#= kendo.toString(kendo.parseDate(TimeStamp), "dd/MM/yyyy HH:mm:ss")#'},
+                { field: "TimeStamp", title: "Date", template: '#= kendo.toString(kendo.parseDate(TimeStamp), "dd/MM/yyyy HH:mm:ss")#'},
                 { field: "Bid", title: "Bid"},
                 { field: "Ask", title: "Ask"},
                 { field: "OpenBuyOrders", title: "Open Buy Orders"},
                 { field: "OpenSellOrders", title: "Open Sell Orders"},
                 { field: "PrevDay", title: "Previous Day"},
                 { field: "Created", title: "Created", template: '#= kendo.toString(kendo.parseDate(Created), "dd/MM/yyyy HH:mm:ss")#'}
+            ]
+        };
+
+        $scope.optionsCcxtGrid = {
+            toolbar: ["excel", "pdf"],
+            excel: {
+                fileName: "Markets Export.xlsx",
+                allPages: true
+            },
+            pdf: {
+                fileName: "Markets Export.pdf",
+                allPages: true
+            },
+            dataSource: {
+                data: $scope.markets,
+                schema: {
+                    model: {
+                        fields: {
+                            symbol: { type: "string" },
+                            high: { type: "number" },
+                            low: { type: "number" },
+                            quoteVolume: { type: "number" },
+                            last: { type: "number" },
+                            baseVolume: { type: "number" },
+                            datetime: { type: "date" },
+                            bid: { type: "number" },
+                            ask: { type: "number" }
+                        }
+                    }
+                },
+                pageSize: 50
+            },
+            scrollable: true,
+            sortable: true,
+            filterable: true,
+            resizable: true,
+            selectable: true,
+            columnMenu: true,
+            pageable: {
+                input: true,
+                numeric: false
+            },
+            columns: [
+                { field: "symbol", title: "Market Name"},
+                { field: "high", title: "High"},
+                { field: "low", title: "Low"},
+                { field: "quoteVolume", title: "Volume"},
+                { field: "last", title: "Last"},
+                { field: "baseVolume", title: "Base Volume"},
+                { field: "datetime", title: "Date", template: '#= kendo.toString(kendo.parseDate(datetime), "dd/MM/yyyy HH:mm:ss")#'},
+                { field: "bid", title: "Bid"},
+                { field: "ask", title: "Ask"}
             ]
         };
 
@@ -272,7 +331,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         $scope.chartInstance = anychart.stock();
 
         // set the price series
-        //chart.plot(0).ohlc(mapping).name('ACME Corp.');
+        //$scope.chartInstance.plot(0).ohlc(priceMapping).name('ACME Corp.');
         $scope.chartInstance.plot(0).candlestick(priceMapping).name('ACME Corp.');
 
         // set the volume series
@@ -304,13 +363,29 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         // connect socket.io client to socket server
         Socket.connect();
 
-        // subscribe socket.io client to bittrex-event topic
+        // subscribe socket.io client to bittrex event topics
         var cleanUpFuncBittrexEventConfirm = Context.subscribe('bittrex-event', function(event, data) {
+            var tickers = data;
+
             // refresh grid datasource markets
-            $scope.marketGrid.dataSource.data(data);
+            //$scope.marketGrid.dataSource.data(tickers);
         });
 
-        var cleanUpFuncBittrexOHLCVConfirm = Context.subscribe('bittrex-ohlcv', function(event, data) {
+        // subscribe socket.io client to ccxt event topics
+        var cleanUpFuncCcxtEventConfirm = Context.subscribe('ccxt-tickers', function(event, data) {
+            var tickers = [];
+
+            Object.keys(data).forEach(function(key, index) {
+                // key: the name of the object key
+                // index: the ordinal position of the key within the object
+                tickers.push(data[key]);
+            });
+
+            // refresh grid datasource markets
+            $scope.marketGrid.dataSource.data(tickers);
+        });
+
+        var cleanUpFuncCcxtOHLCVConfirm = Context.subscribe('ccxt-ohlcv', function(event, data) {
             // refresh candelstick graph datasource
             if (AnychartService.chart) {
                 // refresh the data in the stock series already created
@@ -341,6 +416,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         // unsubscribe socket.io client to bittrex-event and bittrex-ohlcv topic on destroy
         $scope.$on('$destroy', function() {
             cleanUpFuncBittrexEventConfirm();
-            cleanUpFuncBittrexOHLCVConfirm();
+            cleanUpFuncCcxtEventConfirm();
+            cleanUpFuncCcxtOHLCVConfirm();
         });
     }]);
