@@ -142,7 +142,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                         '</div>',
                         valueTemplate: "<div ng-class=\"'s-s-{{dataItem.symbol}}'\" style= \"float: left; margin-top: 3px; margin-right: 5px;\"></div>{{dataItem.name}} [{{dataItem.symbol}}]</span>",
                         template: "<div ng-class=\"'s-s-{{dataItem.symbol}}'\" style= \"float: left; margin-top: 3px; margin-right: 5px;\"></div>{{dataItem.name}} [{{dataItem.symbol}}]</span>",
-                        footerTemplate: 'Total #: instance.dataSource.total() # items found',
+                        footerTemplate: 'Total #: instance.dataSource.total() # coins found',
                     };
 
                     // refresh anyChart datasource
