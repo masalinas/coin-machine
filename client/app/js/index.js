@@ -223,7 +223,12 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                 numeric: false
             },
             columns: [
-                { field: "symbol", title: "Market Name"},
+                { field: "symbol", title: "Market Name", template: function(dataRow) {
+                        var symbol = dataRow.symbol.split("/")[0];
+
+                        return '<div class="s-s-' + symbol + '" style= "float: left; margin-top: 3px; margin-right: 5px;"></div>' + ' <span>' + dataRow.symbol + '</span>';
+                    }
+                },
                 { field: "high", title: "High"},
                 { field: "low", title: "Low"},
                 { field: "quoteVolume", title: "Volume"},
