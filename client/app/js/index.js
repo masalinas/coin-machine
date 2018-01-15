@@ -106,7 +106,7 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
 
         return directive;
     }])
-    .controller('mainController', ['$scope', '$log', 'Bittrex', 'Socket', 'Context', 'AnychartService', function ($scope, $log, Bittrex, Socket, Context, AnychartService) {
+    .controller('mainController', ['$scope', '$log', 'Coinmarketcap', 'Socket', 'Context', 'AnychartService', function ($scope, $log, Coinmarketcap, Socket, Context, AnychartService) {
         'use strict';
 
         // configure any kendo widgets before rendered
@@ -121,6 +121,37 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
         // initialize filter values
         $scope.startTimestamp = new Date();
         $scope.quantity = 1;
+
+        // get all tickers
+        const MAX_MARKETS = 3000; // default MAX MARKETS to recover all market symbols
+        Coinmarketcap.getTicker({limit: MAX_MARKETS})
+            .$promise
+            .then(function(tickers, responseHeaders) {
+                    if (tickers.length > 0)
+                        $scope.tickers = tickers;
+                    else
+                        $scope.tickers = [];
+
+                    $scope.marketOptions = {
+                        dataSource: $scope.tickers,
+                        dataTextField: "name",
+                        dataValueField: "symbol",
+                        headerTemplate: '<div class="dropdown-header k-widget k-header">' +
+                        '<span>Logo</span>' +
+                        '<span>Market [Symbol]</span>' +
+                        '</div>',
+                        valueTemplate: "<div ng-class=\"'s-s-{{dataItem.symbol}}'\" style= \"float: left; margin-top: 3px; margin-right: 5px;\"></div>{{dataItem.name}} [{{dataItem.symbol}}]</span>",
+                        template: "<div ng-class=\"'s-s-{{dataItem.symbol}}'\" style= \"float: left; margin-top: 3px; margin-right: 5px;\"></div>{{dataItem.name}} [{{dataItem.symbol}}]</span>",
+                        footerTemplate: 'Total #: instance.dataSource.total() # items found',
+                    };
+
+                    // refresh anyChart datasource
+                    $log.info($scope.tickers.length + ' tickers recovered');
+                },
+                function(httpResponse) {
+                    var error = httpResponse.data.error;
+                    $log.error('Error querying tickers - ' + error.status + ": " + error.message);
+                });
 
         // configure kendo-ui table for bittrex source
         $scope.optionsGrid = {
@@ -199,14 +230,14 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                     model: {
                         fields: {
                             symbol: { type: "string" },
-                            high: { type: "number" },
                             low: { type: "number" },
-                            quoteVolume: { type: "number" },
-                            last: { type: "number" },
-                            baseVolume: { type: "number" },
-                            datetime: { type: "date" },
+                            high: { type: "number" },
                             bid: { type: "number" },
-                            ask: { type: "number" }
+                            ask: { type: "number" },
+                            last: { type: "number" },
+                            quoteVolume: { type: "number" },
+                            baseVolume: { type: "number" },
+                            datetime: { type: "date" }
                         }
                     }
                 },
@@ -223,20 +254,20 @@ angular.module('coinmachine', ['ui.router', 'kendo.directives', 'lbServices', 'n
                 numeric: false
             },
             columns: [
-                { field: "symbol", title: "Market Name", template: function(dataRow) {
+                { field: "symbol", title: "Symbol", template: function(dataRow) {
                         var symbol = dataRow.symbol.split("/")[0];
 
                         return '<div class="s-s-' + symbol + '" style= "float: left; margin-top: 3px; margin-right: 5px;"></div>' + ' <span>' + dataRow.symbol + '</span>';
                     }
                 },
-                { field: "high", title: "High"},
                 { field: "low", title: "Low"},
-                { field: "quoteVolume", title: "Volume"},
-                { field: "last", title: "Last"},
-                { field: "baseVolume", title: "Base Volume"},
-                { field: "datetime", title: "Date", template: '#= kendo.toString(kendo.parseDate(datetime), "dd/MM/yyyy HH:mm:ss")#'},
+                { field: "high", title: "High"},
                 { field: "bid", title: "Bid"},
-                { field: "ask", title: "Ask"}
+                { field: "ask", title: "Ask"},
+                { field: "last", title: "Last"},
+                { field: "quoteVolume", title: "Volume"},
+                { field: "baseVolume", title: "Base Volume"},
+                { field: "datetime", title: "Date", template: '#= kendo.toString(kendo.parseDate(datetime), "dd/MM/yyyy HH:mm:ss")#'}
             ]
         };
 

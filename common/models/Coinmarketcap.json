@@ -1,0 +1,81 @@
+{
+    "name": "Coinmarketcap",
+    "description": "Coin Marketcap Service",
+    "base": "Model",
+    "properties": {
+        "id": {
+            "type": "string",
+            "required": true,
+            "comments": "Market Id"
+        },
+        "name": {
+            "type": "string",
+            "required": true,
+            "comments": "Market name"
+        },
+        "symbol": {
+            "type": "string",
+            "required": true,
+            "comments": "Market symbol"
+        },
+        "rank": {
+            "type": "number",
+            "required": true,
+            "comments": "Market rank"
+        },
+        "price_usd": {
+            "type": "number",
+            "required": true,
+            "comments": "Market price USD"
+        },
+        "price_btc": {
+            "type": "number",
+            "required": true,
+            "comments": "Market price BTC"
+        },
+        "24h_volume_usd": {
+            "type": "number",
+            "required": true,
+            "comments": "Market 24h USD Volume"
+        },
+        "market_cap_usd": {
+            "type": "number",
+            "required": true,
+            "comments": "Market cap USD"
+        },
+        "available_supply": {
+            "type": "number",
+            "required": true,
+            "comments": "Market available supply"
+        },
+        "total_supply": {
+            "type": "number",
+            "required": true,
+            "comments": "Market total supply"
+        },
+        "percent_change_1h": {
+            "type": "number",
+            "required": true,
+            "comments": "Market percent 1h"
+        },
+        "percent_change_24h": {
+            "type": "number",
+            "required": true,
+            "comments": "Market percent 24h"
+        },
+        "percent_change_7d": {
+            "type": "number",
+            "required": true,
+            "comments": "Market percent 7d"
+        },
+        "last_updated": {
+            "type": "number",
+            "required": true,
+            "comments": "Market last update"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

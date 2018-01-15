@@ -13,6 +13,10 @@
             "./mixins"
         ]
     },
+    "Coinmarketcap": {
+        "dataSource": "coinmachine",
+        "public": true
+    },
     "Tick": {
         "dataSource": "coinmachine",
         "public": true

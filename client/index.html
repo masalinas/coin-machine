@@ -29,6 +29,22 @@
             <!-- main layout -->
             <main id="market-main" layout-padding flex>
                 <!-- header layout -->
+                <label>
+                    Market:
+                    <!--<select kendo-drop-down-list="comboboxMarketName"
+                            k-data-text-field="'name'"
+                            k-data-value-field="'symbol'"
+                            k-data-source="tickers"
+                            placeholder="Select market ..."
+                            style="padding-left: 0; width: 280px; background-color: transparent">
+                    </select>-->
+                    <select kendo-drop-down-list="comboboxMarketName"
+                            k-options="marketOptions"
+                            placeholder="Select market ..."
+                            style="padding-left: 0; width: 280px; background-color: transparent">
+                    </select>
+                </label>
+
                 <div id="market-filter" layout="row" layout-padding>
                     <select kendo-drop-down-list="comboboxMarketInterval" placeholder="Select time interval..." style="padding-left: 0; width: 280px; background-color: transparent">
                         <option>Última sesión - Tick a tick</option>

@@ -5,3 +5,21 @@
 #market-footer {
     background-color: #ccc;
 }
+
+.dropdown-header {
+    border-width: 0 0 1px 0;
+    text-transform: uppercase;
+}
+
+.dropdown-header > span {
+    display: inline-block;
+    padding: 10px;
+}
+
+.dropdown-header > span:first-child {
+    width: 50px;
+}
+
+.k-list-container > .k-footer {
+    padding: 10px;
+}
