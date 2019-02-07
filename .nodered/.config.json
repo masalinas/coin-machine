@@ -469,7 +469,7 @@
   },
   "node-red-contrib-talib": {
    "name": "node-red-contrib-talib",
-   "version": "0.0.1",
+   "version": "0.0.8",
    "local": false,
    "nodes": {
     "talib": {
