@@ -452,13 +452,14 @@
   },
   "node-red-contrib-ccxt": {
    "name": "node-red-contrib-ccxt",
-   "version": "0.0.1",
+   "version": "0.2.3",
    "local": false,
    "nodes": {
     "ccxt-api": {
      "name": "ccxt-api",
      "types": [
-      "ccxt-api"
+      "ccxt-api",
+      "ccxt-exchange"
      ],
      "enabled": true,
      "local": false,
